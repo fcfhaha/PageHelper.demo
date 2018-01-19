@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.mapper.TScmSmtConfigureMapper" >
+  <resultMap id="BaseResultMap" type="com.taotao.pojo.TScmSmtConfigure" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="line_type" property="lineType" jdbcType="VARCHAR" />
+    <result column="line_number" property="lineNumber" jdbcType="VARCHAR" />
+    <result column="machine_type" property="machineType" jdbcType="SMALLINT" />
+    <result column="machine_name" property="machineName" jdbcType="VARCHAR" />
+    <result column="acquire_pattern_path" property="acquirePatternPath" jdbcType="VARCHAR" />
+    <result column="save_local_path" property="saveLocalPath" jdbcType="VARCHAR" />
+    <result column="picture_name" property="pictureName" jdbcType="VARCHAR" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+    <result column="last_updated_by" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="active" property="active" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, line_type, line_number, machine_type, machine_name, acquire_pattern_path, save_local_path, 
+    picture_name, last_update_date, last_updated_by, create_date, created_by, active
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TScmSmtConfigureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_scm_smt_configure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_scm_smt_configure
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_scm_smt_configure
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.TScmSmtConfigureExample" >
+    delete from t_scm_smt_configure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.taotao.pojo.TScmSmtConfigure" >
+    insert into t_scm_smt_configure (id, line_type, line_number, 
+      machine_type, machine_name, acquire_pattern_path, 
+      save_local_path, picture_name, last_update_date, 
+      last_updated_by, create_date, created_by, 
+      active)
+    values (#{id,jdbcType=INTEGER}, #{lineType,jdbcType=VARCHAR}, #{lineNumber,jdbcType=VARCHAR}, 
+      #{machineType,jdbcType=SMALLINT}, #{machineName,jdbcType=VARCHAR}, #{acquirePatternPath,jdbcType=VARCHAR}, 
+      #{saveLocalPath,jdbcType=VARCHAR}, #{pictureName,jdbcType=VARCHAR}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, 
+      #{active,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taotao.pojo.TScmSmtConfigure" >
+    insert into t_scm_smt_configure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lineType != null" >
+        line_type,
+      </if>
+      <if test="lineNumber != null" >
+        line_number,
+      </if>
+      <if test="machineType != null" >
+        machine_type,
+      </if>
+      <if test="machineName != null" >
+        machine_name,
+      </if>
+      <if test="acquirePatternPath != null" >
+        acquire_pattern_path,
+      </if>
+      <if test="saveLocalPath != null" >
+        save_local_path,
+      </if>
+      <if test="pictureName != null" >
+        picture_name,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        last_updated_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lineType != null" >
+        #{lineType,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNumber != null" >
+        #{lineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="machineType != null" >
+        #{machineType,jdbcType=SMALLINT},
+      </if>
+      <if test="machineName != null" >
+        #{machineName,jdbcType=VARCHAR},
+      </if>
+      <if test="acquirePatternPath != null" >
+        #{acquirePatternPath,jdbcType=VARCHAR},
+      </if>
+      <if test="saveLocalPath != null" >
+        #{saveLocalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureName != null" >
+        #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.taotao.pojo.TScmSmtConfigureExample" resultType="java.lang.Integer" >
+    select count(*) from t_scm_smt_configure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_scm_smt_configure
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineType != null" >
+        line_type = #{record.lineType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineNumber != null" >
+        line_number = #{record.lineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineType != null" >
+        machine_type = #{record.machineType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.machineName != null" >
+        machine_name = #{record.machineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquirePatternPath != null" >
+        acquire_pattern_path = #{record.acquirePatternPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saveLocalPath != null" >
+        save_local_path = #{record.saveLocalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureName != null" >
+        picture_name = #{record.pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdateDate != null" >
+        last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdatedBy != null" >
+        last_updated_by = #{record.lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdBy != null" >
+        created_by = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.active != null" >
+        active = #{record.active,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_scm_smt_configure
+    set id = #{record.id,jdbcType=INTEGER},
+      line_type = #{record.lineType,jdbcType=VARCHAR},
+      line_number = #{record.lineNumber,jdbcType=VARCHAR},
+      machine_type = #{record.machineType,jdbcType=SMALLINT},
+      machine_name = #{record.machineName,jdbcType=VARCHAR},
+      acquire_pattern_path = #{record.acquirePatternPath,jdbcType=VARCHAR},
+      save_local_path = #{record.saveLocalPath,jdbcType=VARCHAR},
+      picture_name = #{record.pictureName,jdbcType=VARCHAR},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      last_updated_by = #{record.lastUpdatedBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      created_by = #{record.createdBy,jdbcType=VARCHAR},
+      active = #{record.active,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taotao.pojo.TScmSmtConfigure" >
+    update t_scm_smt_configure
+    <set >
+      <if test="lineType != null" >
+        line_type = #{lineType,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNumber != null" >
+        line_number = #{lineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="machineType != null" >
+        machine_type = #{machineType,jdbcType=SMALLINT},
+      </if>
+      <if test="machineName != null" >
+        machine_name = #{machineName,jdbcType=VARCHAR},
+      </if>
+      <if test="acquirePatternPath != null" >
+        acquire_pattern_path = #{acquirePatternPath,jdbcType=VARCHAR},
+      </if>
+      <if test="saveLocalPath != null" >
+        save_local_path = #{saveLocalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureName != null" >
+        picture_name = #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        last_updated_by = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taotao.pojo.TScmSmtConfigure" >
+    update t_scm_smt_configure
+    set line_type = #{lineType,jdbcType=VARCHAR},
+      line_number = #{lineNumber,jdbcType=VARCHAR},
+      machine_type = #{machineType,jdbcType=SMALLINT},
+      machine_name = #{machineName,jdbcType=VARCHAR},
+      acquire_pattern_path = #{acquirePatternPath,jdbcType=VARCHAR},
+      save_local_path = #{saveLocalPath,jdbcType=VARCHAR},
+      picture_name = #{pictureName,jdbcType=VARCHAR},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      last_updated_by = #{lastUpdatedBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      active = #{active,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
